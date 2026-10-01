@@ -1,16 +1,14 @@
 /**
  * Cronograma Tático de Estudos PC-BA
- * Período: 28 de Setembro a 30 de Novembro (64 dias)
+ * Estrutura: 64 Metas Sequenciais / 9 Etapas
  * Edital Verticalizado Completo e Persistência LocalStorage
  */
 
-// 1. Base de dados dos 64 dias
+// 1. Base de dados das 64 metas sequenciais
 const studyScheduleData = [
-  // --- SEMANA 1: 28/09 a 04/10 • Fundamentos de Alto Peso ---
+  // --- ETAPA 1: Fundamentos de Alto Peso ---
   {
     day: 1,
-    date: "28/09/2026",
-    weekday: "Segunda-feira",
     week: 1,
     theme: "Teoria do Crime & Semântica e Interpretação",
     subjects: [
@@ -42,8 +40,6 @@ const studyScheduleData = [
   },
   {
     day: 2,
-    date: "29/09/2026",
-    weekday: "Terça-feira",
     week: 1,
     theme: "Art. 5º CF/88 & Inquérito Policial",
     subjects: [
@@ -75,8 +71,6 @@ const studyScheduleData = [
   },
   {
     day: 3,
-    date: "30/09/2026",
-    weekday: "Quarta-feira",
     week: 1,
     theme: "Organização Administrativa & Lógica Proposicional",
     subjects: [
@@ -108,8 +102,6 @@ const studyScheduleData = [
   },
   {
     day: 4,
-    date: "01/10/2026",
-    weekday: "Quinta-feira",
     week: 1,
     theme: "Art. 5º Remédios Constitucionais & Inquérito Policial Diligências",
     subjects: [
@@ -141,8 +133,6 @@ const studyScheduleData = [
   },
   {
     day: 5,
-    date: "02/10/2026",
-    weekday: "Sexta-feira",
     week: 1,
     theme: "Ilicitude, Culpabilidade & Segurança da Informação",
     subjects: [
@@ -174,8 +164,6 @@ const studyScheduleData = [
   },
   {
     day: 6,
-    date: "03/10/2026",
-    weekday: "Sábado",
     week: 1,
     theme: "Legislação Estadual PC-BA & Estatística: Tipos de Variáveis",
     subjects: [
@@ -206,8 +194,6 @@ const studyScheduleData = [
   },
   {
     day: 7,
-    date: "04/10/2026",
-    weekday: "Domingo",
     week: 1,
     theme: "Simulado 01 & Revisão Ativa da Semana 1",
     subjects: [
@@ -229,8 +215,6 @@ const studyScheduleData = [
   // --- SEMANA 2: 05/10 a 11/10 • Provas, Sintaxe e Crimes ---
   {
     day: 8,
-    date: "05/10/2026",
-    weekday: "Segunda-feira",
     week: 2,
     theme: "Crimes contra a Pessoa & Morfologia (Classes de Palavras)",
     subjects: [
@@ -262,8 +246,6 @@ const studyScheduleData = [
   },
   {
     day: 9,
-    date: "06/10/2026",
-    weekday: "Terça-feira",
     week: 2,
     theme: "Teoria Geral das Provas & Licitações (Lei 14.133/21)",
     subjects: [
@@ -295,8 +277,6 @@ const studyScheduleData = [
   },
   {
     day: 10,
-    date: "07/10/2026",
-    weekday: "Quarta-feira",
     week: 2,
     theme: "Sintaxe da Oração e do Período & RLM Equivalências",
     subjects: [
@@ -328,8 +308,6 @@ const studyScheduleData = [
   },
   {
     day: 11,
-    date: "08/10/2026",
-    weekday: "Quinta-feira",
     week: 2,
     theme: "Espécies de Provas no CPP & Atos Administrativos",
     subjects: [
@@ -362,8 +340,6 @@ const studyScheduleData = [
   },
   {
     day: 12,
-    date: "09/10/2026",
-    weekday: "Sexta-feira",
     week: 2,
     theme: "Organização do Estado & Internet e Navegadores",
     subjects: [
@@ -394,8 +370,6 @@ const studyScheduleData = [
   },
   {
     day: 13,
-    date: "10/10/2026",
-    weekday: "Sábado",
     week: 2,
     theme: "Medicina Legal: Documentos & Estatística: Tabelas e Médias",
     subjects: [
@@ -427,8 +401,6 @@ const studyScheduleData = [
   },
   {
     day: 14,
-    date: "11/10/2026",
-    weekday: "Domingo",
     week: 2,
     theme: "Simulado 02 & Revisão de Provas e Licitações",
     subjects: [
@@ -450,8 +422,6 @@ const studyScheduleData = [
   // --- SEMANA 3: 12/10 a 18/10 • Licitações, Prisões e Informática ---
   {
     day: 15,
-    date: "12/10/2026",
-    weekday: "Segunda-feira",
     week: 3,
     theme: "Crimes contra a Administração Pública & Sintaxe Período Composto",
     subjects: [
@@ -484,8 +454,6 @@ const studyScheduleData = [
   },
   {
     day: 16,
-    date: "13/10/2026",
-    weekday: "Terça-feira",
     week: 3,
     theme: "Prisões no CPP & Contratação Direta (Lei 14.133/21)",
     subjects: [
@@ -517,8 +485,6 @@ const studyScheduleData = [
   },
   {
     day: 17,
-    date: "14/10/2026",
-    weekday: "Quarta-feira",
     week: 3,
     theme: "Segurança Pública (Art. 144 CF) & RLM Relações de Associação",
     subjects: [
@@ -550,8 +516,6 @@ const studyScheduleData = [
   },
   {
     day: 18,
-    date: "15/10/2026",
-    weekday: "Quinta-feira",
     week: 3,
     theme: "Lei Maria da Penha (Lei 11.340/2006) & Lei de Tortura (Lei 9.455/1995)",
     subjects: [
@@ -584,8 +548,6 @@ const studyScheduleData = [
   },
   {
     day: 19,
-    date: "16/10/2026",
-    weekday: "Sexta-feira",
     week: 3,
     theme: "Aplicação da Lei Penal & Reescrita de Frases e Crase",
     subjects: [
@@ -617,8 +579,6 @@ const studyScheduleData = [
   },
   {
     day: 20,
-    date: "17/10/2026",
-    weekday: "Sábado",
     week: 3,
     theme: "Medicina Legal: Traumatologia & Estatística: Dispersão",
     subjects: [
@@ -650,8 +610,6 @@ const studyScheduleData = [
   },
   {
     day: 21,
-    date: "18/10/2026",
-    weekday: "Domingo",
     week: 3,
     theme: "Simulado 03 & Revisão de Prisões, Crimes Adm e Traumatologia",
     subjects: [
@@ -673,8 +631,6 @@ const studyScheduleData = [
   // --- SEMANA 4: 19/10 a 25/10 • Contabilidade 1, Drogas e Ação Penal ---
   {
     day: 22,
-    date: "19/10/2026",
-    weekday: "Segunda-feira",
     week: 4,
     theme: "Lei de Drogas (Lei 11.343/2006) & Ação Penal no CPP",
     subjects: [
@@ -707,8 +663,6 @@ const studyScheduleData = [
   },
   {
     day: 23,
-    date: "20/10/2026",
-    weekday: "Terça-feira",
     week: 4,
     theme: "Agentes Públicos e Improbidade (Lei 8.429/92) & Concordância Verbal",
     subjects: [
@@ -740,8 +694,6 @@ const studyScheduleData = [
   },
   {
     day: 24,
-    date: "21/10/2026",
-    weekday: "Quarta-feira",
     week: 4,
     theme: "Contabilidade: Conceitos, Princípios e Partidas Dobradas",
     subjects: [
@@ -773,8 +725,6 @@ const studyScheduleData = [
   },
   {
     day: 25,
-    date: "22/10/2026",
-    weekday: "Quinta-feira",
     week: 4,
     theme: "Lei de Abuso de Autoridade (Lei 13.869/2019) & Princípios do Processo Penal",
     subjects: [
@@ -806,8 +756,6 @@ const studyScheduleData = [
   },
   {
     day: 26,
-    date: "23/10/2026",
-    weekday: "Sexta-feira",
     week: 4,
     theme: "Contabilidade: Fatos Contábeis & Escrituração & Pacote Office",
     subjects: [
@@ -839,8 +787,6 @@ const studyScheduleData = [
   },
   {
     day: 27,
-    date: "24/10/2026",
-    weekday: "Sábado",
     week: 4,
     theme: "Medicina Legal: Asfixiologia & Estatística: Amostragem Aleatória",
     subjects: [
@@ -873,8 +819,6 @@ const studyScheduleData = [
   },
   {
     day: 28,
-    date: "25/10/2026",
-    weekday: "Domingo",
     week: 4,
     theme: "Simulado 04 & Revisão de Drogas, Fatos Contábeis e Asfixiologia",
     subjects: [
@@ -896,8 +840,6 @@ const studyScheduleData = [
   // --- SEMANA 5: 26/10 a 01/11 • Medicina Legal 1 e Contabilidade 2 ---
   {
     day: 29,
-    date: "26/10/2026",
-    weekday: "Segunda-feira",
     week: 5,
     theme: "Organizações Criminosas (Lei 12.850/13) & Crimes Hediondos (Lei 8.072/90)",
     subjects: [
@@ -930,8 +872,6 @@ const studyScheduleData = [
   },
   {
     day: 30,
-    date: "27/10/2026",
-    weekday: "Terça-feira",
     week: 5,
     theme: "Contabilidade: Plano de Contas & Estoques & Ativo Intangível",
     subjects: [
@@ -963,8 +903,6 @@ const studyScheduleData = [
   },
   {
     day: 31,
-    date: "28/10/2026",
-    weekday: "Quarta-feira",
     week: 5,
     theme: "Juizados Especiais Criminais (Lei 9.099/95) & Crimes Ambientais (Lei 9.605/98)",
     subjects: [
@@ -996,8 +934,6 @@ const studyScheduleData = [
   },
   {
     day: 32,
-    date: "29/10/2026",
-    weekday: "Quinta-feira",
     week: 5,
     theme: "Medicina Legal: Toxicologia & Sexologia Forense",
     subjects: [
@@ -1029,8 +965,6 @@ const studyScheduleData = [
   },
   {
     day: 33,
-    date: "30/10/2026",
-    weekday: "Sexta-feira",
     week: 5,
     theme: "Contabilidade: Balanço Patrimonial & Lei das S/A (Lei 6.404/76)",
     subjects: [
@@ -1062,8 +996,6 @@ const studyScheduleData = [
   },
   {
     day: 34,
-    date: "31/10/2026",
-    weekday: "Sábado",
     week: 5,
     theme: "Estatuto do Desarmamento (Lei 10.826/03) & ECA (Lei 8.069/90)",
     subjects: [
@@ -1096,8 +1028,6 @@ const studyScheduleData = [
   },
   {
     day: 35,
-    date: "01/11/2026",
-    weekday: "Domingo",
     week: 5,
     theme: "Simulado 05 (Metade do Cronograma!) & Revisão Geral de Outubro",
     subjects: [
@@ -1119,8 +1049,6 @@ const studyScheduleData = [
   // --- SEMANA 6: 02/11 a 08/11 • Igualdade Racial, Medicina 2 e RLM ---
   {
     day: 36,
-    date: "02/11/2026",
-    weekday: "Segunda-feira",
     week: 6,
     theme: "Igualdade Racial e de Gênero: Convenções & Discriminação",
     subjects: [
@@ -1152,8 +1080,6 @@ const studyScheduleData = [
   },
   {
     day: 37,
-    date: "03/11/2026",
-    weekday: "Terça-feira",
     week: 6,
     theme: "Crimes Resultantes de Preconceito (Lei 7.716/89) & Responsabilidade Civil do Estado",
     subjects: [
@@ -1185,8 +1111,6 @@ const studyScheduleData = [
   },
   {
     day: 38,
-    date: "04/11/2026",
-    weekday: "Quarta-feira",
     week: 6,
     theme: "Lei de Execução Penal (LEP) & Jurisdição e Competência no CPP",
     subjects: [
@@ -1217,8 +1141,6 @@ const studyScheduleData = [
   },
   {
     day: 39,
-    date: "05/11/2026",
-    weekday: "Quinta-feira",
     week: 6,
     theme: "Direito Constitucional: Nacionalidade e Direitos Políticos & Nuvem e Backup",
     subjects: [
@@ -1248,8 +1170,6 @@ const studyScheduleData = [
   },
   {
     day: 40,
-    date: "06/11/2026",
-    weekday: "Sexta-feira",
     week: 6,
     theme: "Crimes contra o Patrimônio & Medicina Legal Revisão",
     subjects: [
@@ -1281,8 +1201,6 @@ const studyScheduleData = [
   },
   {
     day: 41,
-    date: "07/11/2026",
-    weekday: "Sábado",
     week: 6,
     theme: "Legislação da PC-BA Aprofundada & Noções de Contabilidade Revisão",
     subjects: [
@@ -1312,8 +1230,6 @@ const studyScheduleData = [
   },
   {
     day: 42,
-    date: "08/11/2026",
-    weekday: "Domingo",
     week: 6,
     theme: "Simulado 06 & Revisão de Igualdade Racial, Armas e Balanço",
     subjects: [
@@ -1335,8 +1251,6 @@ const studyScheduleData = [
   // --- SEMANA 7: 09/11 a 15/11 • Aprofundamento dos Tópicos +40% ---
   {
     day: 43,
-    date: "09/11/2026",
-    weekday: "Segunda-feira",
     week: 7,
     theme: "Imersão: Teoria Geral das Provas no CPP (40% de Proc. Penal)",
     subjects: [
@@ -1366,8 +1280,6 @@ const studyScheduleData = [
   },
   {
     day: 44,
-    date: "10/11/2026",
-    weekday: "Terça-feira",
     week: 7,
     theme: "Imersão: Teoria do Crime (31% de Penal) & Homicídio (23%)",
     subjects: [
@@ -1388,8 +1300,6 @@ const studyScheduleData = [
   },
   {
     day: 45,
-    date: "11/11/2026",
-    weekday: "Quarta-feira",
     week: 7,
     theme: "Imersão: Licitações & Org. Administrativa (50% de Direito Adm)",
     subjects: [
@@ -1409,8 +1319,6 @@ const studyScheduleData = [
   },
   {
     day: 46,
-    date: "12/11/2026",
-    weekday: "Quinta-feira",
     week: 7,
     theme: "Imersão: Artigo 5º da CF/88 (22% de Constitucional) & Inquérito Policial (27%)",
     subjects: [
@@ -1438,8 +1346,6 @@ const studyScheduleData = [
   },
   {
     day: 47,
-    date: "13/11/2026",
-    weekday: "Sexta-feira",
     week: 7,
     theme: "Imersão: Raciocínio Lógico (+50% Proposições e Relações) & Estatística",
     subjects: [
@@ -1460,8 +1366,6 @@ const studyScheduleData = [
   },
   {
     day: 48,
-    date: "14/11/2026",
-    weekday: "Sábado",
     week: 7,
     theme: "Imersão: Medicina Legal Completa & Legislação Penal Extravagante",
     subjects: [
@@ -1481,8 +1385,6 @@ const studyScheduleData = [
   },
   {
     day: 49,
-    date: "15/11/2026",
-    weekday: "Domingo",
     week: 7,
     theme: "Simulado 07 Oficial de Reta Final & Análise de Desempenho",
     subjects: [
@@ -1504,8 +1406,6 @@ const studyScheduleData = [
   // --- SEMANA 8: 16/11 a 22/11 • Reta Final - Questões & Leis Secas ---
   {
     day: 50,
-    date: "16/11/2026",
-    weekday: "Segunda-feira",
     week: 8,
     theme: "Leitura da Lei Seca: Código Penal (Parte Geral e Especial)",
     subjects: [
@@ -1525,8 +1425,6 @@ const studyScheduleData = [
   },
   {
     day: 51,
-    date: "17/11/2026",
-    weekday: "Terça-feira",
     week: 8,
     theme: "Leitura da Lei Seca: CPP (Inquérito, Ação, Provas e Prisões)",
     subjects: [
@@ -1547,8 +1445,6 @@ const studyScheduleData = [
   },
   {
     day: 52,
-    date: "18/11/2026",
-    weekday: "Quarta-feira",
     week: 8,
     theme: "Leitura da CF/88 (Art. 5º e Art. 144) & Lei 14.133/21 Resumida",
     subjects: [
@@ -1568,8 +1464,6 @@ const studyScheduleData = [
   },
   {
     day: 53,
-    date: "19/11/2026",
-    weekday: "Quinta-feira",
     week: 8,
     theme: "Leis Extravagantes: Drogas, Maria da Penha, Tortura e Abuso",
     subjects: [
@@ -1589,8 +1483,6 @@ const studyScheduleData = [
   },
   {
     day: 54,
-    date: "20/11/2026",
-    weekday: "Sexta-feira",
     week: 8,
     theme: "Língua Portuguesa: Rodada Final de Interpretação e Sintaxe",
     subjects: [
@@ -1610,8 +1502,6 @@ const studyScheduleData = [
   },
   {
     day: 55,
-    date: "21/11/2026",
-    weekday: "Sábado",
     week: 8,
     theme: "Informática & Contabilidade & RLM: Sprint de Revisão",
     subjects: [
@@ -1632,8 +1522,6 @@ const studyScheduleData = [
   },
   {
     day: 56,
-    date: "22/11/2026",
-    weekday: "Domingo",
     week: 8,
     theme: "Simulado 08 Oficial & Calibragem Estratégica Final",
     subjects: [
@@ -1654,8 +1542,6 @@ const studyScheduleData = [
   // --- SEMANA 9: 23/11 a 30/11 • Revisão Geral de Véspera & Fixação ---
   {
     day: 57,
-    date: "23/11/2026",
-    weekday: "Segunda-feira",
     week: 9,
     theme: "Super Revisão: Direito Penal e Processual Penal",
     subjects: [
@@ -1675,8 +1561,6 @@ const studyScheduleData = [
   },
   {
     day: 58,
-    date: "24/11/2026",
-    weekday: "Terça-feira",
     week: 9,
     theme: "Super Revisão: Direito Constitucional e Administrativo",
     subjects: [
@@ -1696,8 +1580,6 @@ const studyScheduleData = [
   },
   {
     day: 59,
-    date: "25/11/2026",
-    weekday: "Quarta-feira",
     week: 9,
     theme: "Super Revisão: Legislação Extravagante & Estadual PC-BA",
     subjects: [
@@ -1717,8 +1599,6 @@ const studyScheduleData = [
   },
   {
     day: 60,
-    date: "26/11/2026",
-    weekday: "Quinta-feira",
     week: 9,
     theme: "Super Revisão: Medicina Legal & Igualdade Racial e Gênero",
     subjects: [
@@ -1738,8 +1618,6 @@ const studyScheduleData = [
   },
   {
     day: 61,
-    date: "27/11/2026",
-    weekday: "Sexta-feira",
     week: 9,
     theme: "Super Revisão: Português & RLM & Informática",
     subjects: [
@@ -1760,8 +1638,6 @@ const studyScheduleData = [
   },
   {
     day: 62,
-    date: "28/11/2026",
-    weekday: "Sábado",
     week: 9,
     theme: "Super Revisão: Contabilidade & Estatística & Arquivologia",
     subjects: [
@@ -1782,8 +1658,6 @@ const studyScheduleData = [
   },
   {
     day: 63,
-    date: "29/11/2026",
-    weekday: "Domingo",
     week: 9,
     theme: "Revisão Leve de Véspera & Caderno de Erros Consolidado",
     subjects: [
@@ -1804,8 +1678,6 @@ const studyScheduleData = [
   },
   {
     day: 64,
-    date: "30/11/2026",
-    weekday: "Segunda-feira",
     week: 9,
     theme: "Conclusão da Missão 30 de Novembro • Aprovação PC-BA!",
     subjects: [
@@ -1883,6 +1755,15 @@ function updateDashboard() {
 
   const percent = Math.round((doneDays / totalDays) * 100);
 
+  // Determinar primeira meta pendente
+  let firstPending = 1;
+  for (let i = 1; i <= totalDays; i++) {
+    if (!userProgress.completedDays[i]) {
+      firstPending = i;
+      break;
+    }
+  }
+
   // Atualizar DOM
   const overallPercent = document.getElementById("overallPercent");
   const overallProgressBar = document.getElementById("overallProgressBar");
@@ -1898,13 +1779,12 @@ function updateDashboard() {
   if (totalQuestionsSolved) totalQuestionsSolved.textContent = totalQuestions;
 
   if (currentStreak) {
-    if (doneDays === 0) currentStreak.textContent = "Dia 1";
-    else if (doneDays >= totalDays) currentStreak.textContent = "Aprovado! 100%";
-    else currentStreak.textContent = `Dia ${doneDays + 1}`;
+    if (doneDays >= totalDays) currentStreak.textContent = "Missão 100%!";
+    else currentStreak.textContent = `Meta ${firstPending}`;
   }
 }
 
-// 6. Renderização dos Dias
+// 6. Renderização das Metas do Cronograma
 function renderDays(filter = "all", week = "all", searchTerm = "") {
   const container = document.getElementById("daysList");
   if (!container) return;
@@ -1912,8 +1792,17 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
   container.innerHTML = "";
   const searchLower = searchTerm.trim().toLowerCase();
 
+  // Achar a meta atual (primeira não concluída)
+  let currentActiveMeta = 1;
+  for (let i = 1; i <= studyScheduleData.length; i++) {
+    if (!userProgress.completedDays[i]) {
+      currentActiveMeta = i;
+      break;
+    }
+  }
+
   const filtered = studyScheduleData.filter(dayItem => {
-    // Filtro por semana
+    // Filtro por etapa (módulo)
     if (week !== "all" && dayItem.week.toString() !== week) {
       return false;
     }
@@ -1922,21 +1811,19 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
     const isCompleted = !!userProgress.completedDays[dayItem.day];
     if (filter === "completed" && !isCompleted) return false;
     if (filter === "pending" && isCompleted) return false;
-    if (filter === "today" && dayItem.day !== 1) { // Consideramos dia 1 o início (28 de setembro)
-      // Se for dia do sistema, pode verificar
-      return dayItem.day === 1;
+    if (filter === "current" && dayItem.day !== currentActiveMeta) {
+      return false;
     }
 
     // Filtro por busca de texto
     if (searchLower) {
       const matchDay = dayItem.day.toString().includes(searchLower);
-      const matchDate = dayItem.date.toLowerCase().includes(searchLower);
       const matchTheme = dayItem.theme.toLowerCase().includes(searchLower);
       const matchSubj = dayItem.subjects.some(s => 
         s.name.toLowerCase().includes(searchLower) ||
         s.topics.some(t => t.toLowerCase().includes(searchLower))
       );
-      if (!matchDay && !matchDate && !matchTheme && !matchSubj) {
+      if (!matchDay && !matchTheme && !matchSubj) {
         return false;
       }
     }
@@ -1947,7 +1834,7 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
   if (filtered.length === 0) {
     container.innerHTML = `
       <div class="no-results">
-        <h3>Nenhum dia encontrado</h3>
+        <h3>Nenhuma meta encontrada</h3>
         <p>Tente ajustar os filtros ou pesquisar por outro termo.</p>
       </div>
     `;
@@ -1956,14 +1843,14 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
 
   filtered.forEach(dayItem => {
     const isDone = !!userProgress.completedDays[dayItem.day];
-    const isToday = dayItem.day === 1; // 28/09 inicial
+    const isCurrent = dayItem.day === currentActiveMeta;
     const qValue = userProgress.questionsSolved[dayItem.day] !== undefined 
       ? userProgress.questionsSolved[dayItem.day] 
       : (isDone ? dayItem.defaultQuestions : "");
     const noteValue = userProgress.notes[dayItem.day] || "";
 
     const card = document.createElement("div");
-    card.className = `day-card ${isDone ? "completed" : ""} ${isToday ? "today" : ""}`;
+    card.className = `day-card ${isDone ? "completed" : ""} ${isCurrent ? "today" : ""}`;
     card.id = `card-day-${dayItem.day}`;
 
     // Monta disciplinas e tópicos
@@ -2001,17 +1888,17 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
       <div class="day-header">
         <div class="day-identity">
           <div class="day-badge">
-            <span class="day-num">D${dayItem.day}</span>
-            <span class="day-week">${dayItem.weekday.split("-")[0]}</span>
+            <span class="day-num">#${dayItem.day}</span>
+            <span class="day-week">Meta</span>
           </div>
           <div class="day-title-info">
-            <span class="day-date-str">${dayItem.date} • Semana ${dayItem.week}</span>
+            <span class="day-date-str">Meta ${dayItem.day} de 64 • Etapa ${dayItem.week}</span>
             <h2 class="day-theme">${dayItem.theme}</h2>
           </div>
         </div>
         <div class="day-actions">
           <button class="btn-toggle-day" data-day="${dayItem.day}">
-            ${isDone ? "✓ Dia Concluído" : "○ Concluir Dia"}
+            ${isDone ? "✓ Meta Concluída" : "○ Concluir Meta"}
           </button>
         </div>
       </div>
@@ -2027,7 +1914,7 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
           <span>questões</span>
         </div>
         <div class="day-notes-wrapper">
-          <input type="text" class="day-notes-input" data-day="${dayItem.day}" placeholder="Anotações do dia (ex: revisar art. 121, taxa 85% de acertos...)" value="${noteValue}">
+          <input type="text" class="day-notes-input" data-day="${dayItem.day}" placeholder="Anotações desta meta (ex: revisar art. 121, taxa 85% de acertos...)" value="${noteValue}">
         </div>
       </div>
     `;
@@ -2040,7 +1927,7 @@ function renderDays(filter = "all", week = "all", searchTerm = "") {
 
 // 7. Event Handlers
 function attachEventHandlers() {
-  // Botão Concluir Dia Inteiro
+  // Botão Concluir Meta Inteira
   document.querySelectorAll(".btn-toggle-day").forEach(btn => {
     btn.onclick = (e) => {
       const dayNum = parseInt(btn.getAttribute("data-day"), 10);
@@ -2049,7 +1936,7 @@ function attachEventHandlers() {
 
       userProgress.completedDays[dayNum] = willBeDone;
 
-      // Marcar/Desmarcar todos os tópicos do dia
+      // Marcar/Desmarcar todos os tópicos da meta
       const dayData = studyScheduleData.find(d => d.day === dayNum);
       if (dayData) {
         dayData.subjects.forEach((subj, sIdx) => {
@@ -2066,7 +1953,6 @@ function attachEventHandlers() {
       }
 
       saveProgress();
-      // Re-renderizar o card mantendo os filtros
       renderDays(currentFilter, currentWeek, currentSearch);
     };
   });
@@ -2084,7 +1970,7 @@ function attachEventHandlers() {
         else parentLi.classList.remove("checked");
       }
 
-      // Se todos os tópicos do dia forem concluídos, pode marcar o dia automaticamente
+      // Se todos os tópicos da meta forem concluídos, marca a meta automaticamente
       const dayNum = parseInt(key.split("_")[0], 10);
       const dayData = studyScheduleData.find(d => d.day === dayNum);
       if (dayData) {
@@ -2103,7 +1989,7 @@ function attachEventHandlers() {
           const card = document.getElementById(`card-day-${dayNum}`);
           if (card) card.classList.add("completed");
           const btn = card ? card.querySelector(".btn-toggle-day") : null;
-          if (btn) btn.innerHTML = "✓ Dia Concluído";
+          if (btn) btn.innerHTML = "✓ Meta Concluída";
         }
       }
 
@@ -2125,7 +2011,7 @@ function attachEventHandlers() {
     };
   });
 
-  // Campo de Anotações do Dia
+  // Campo de Anotações da Meta
   document.querySelectorAll(".day-notes-input").forEach(input => {
     input.onchange = (e) => {
       const dayNum = parseInt(input.getAttribute("data-day"), 10);

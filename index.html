@@ -23,7 +23,7 @@
         </div>
         <div>
           <h1>PC-BA <span>Reta Final</span></h1>
-          <p class="subtitle">Cronograma Estratégico de Estudos • 28 de Setembro a 30 de Novembro</p>
+          <p class="subtitle">Cronograma Estratégico de Estudos • 64 Metas Sequenciais</p>
         </div>
       </div>
 
@@ -59,23 +59,23 @@
           <div class="progress-bar-fill" id="overallProgressBar" style="width: 0%;"></div>
         </div>
         <div class="progress-stats">
-          <span><strong id="completedDaysCount">0</strong> de 64 dias cumpridos</span>
+          <span><strong id="completedDaysCount">0</strong> de 64 metas cumpridas</span>
           <span><strong id="completedTasksCount">0</strong> tópicos concluídos</span>
         </div>
       </div>
 
-      <!-- Card Dias Restantes -->
+      <!-- Card Total de Metas -->
       <div class="metric-card mini-card">
-        <div class="metric-icon">📅</div>
+        <div class="metric-icon">🎯</div>
         <div class="metric-content">
           <div class="metric-value" id="daysRemaining">64</div>
-          <div class="metric-label">Dias Totais na Jornada</div>
+          <div class="metric-label">Metas no Cronograma</div>
         </div>
       </div>
 
       <!-- Card Questões Resolvidas -->
       <div class="metric-card mini-card">
-        <div class="metric-icon">🎯</div>
+        <div class="metric-icon">📝</div>
         <div class="metric-content">
           <div class="metric-value" id="totalQuestionsSolved">0</div>
           <div class="metric-label">Questões Praticadas</div>
@@ -86,8 +86,8 @@
       <div class="metric-card mini-card">
         <div class="metric-icon">⚡</div>
         <div class="metric-content">
-          <div class="metric-value" id="currentStreak">Dia 1</div>
-          <div class="metric-label">Status da Operação</div>
+          <div class="metric-value" id="currentStreak">Meta 1</div>
+          <div class="metric-label">Meta Atual</div>
         </div>
       </div>
     </div>
@@ -131,26 +131,26 @@
 
       <!-- Filtros Rápidos -->
       <div class="filter-group">
-        <button class="filter-chip active" data-filter="all">Todos os Dias (64)</button>
+        <button class="filter-chip active" data-filter="all">Todas as Metas (64)</button>
         <button class="filter-chip" data-filter="pending">Pendentes</button>
-        <button class="filter-chip" data-filter="completed">Concluídos</button>
-        <button class="filter-chip" data-filter="today">Dia de Hoje</button>
+        <button class="filter-chip" data-filter="completed">Concluídas</button>
+        <button class="filter-chip" data-filter="current">Meta Atual</button>
       </div>
 
-      <!-- Seletor de Semanas -->
+      <!-- Seletor de Etapas -->
       <div class="week-selector">
-        <label for="weekSelect">Semana:</label>
+        <label for="weekSelect">Etapa:</label>
         <select id="weekSelect">
-          <option value="all">Todas as Semanas (1 a 9)</option>
-          <option value="1">Semana 1: 28/09 a 04/10 • Fundamentos de Alto Peso</option>
-          <option value="2">Semana 2: 05/10 a 11/10 • Provas, Sintaxe e Crimes</option>
-          <option value="3">Semana 3: 12/10 a 18/10 • Licitações, Prisões e Informática</option>
-          <option value="4">Semana 4: 19/10 a 25/10 • Contabilidade 1, Drogas e Ação Penal</option>
-          <option value="5">Semana 5: 26/10 a 01/11 • Medicina Legal 1 e Contabilidade 2</option>
-          <option value="6">Semana 6: 02/11 a 08/11 • Igualdade Racial, Medicina 2 e RLM</option>
-          <option value="7">Semana 7: 09/11 a 15/11 • Aprofundamento dos Tópicos +40%</option>
-          <option value="8">Semana 8: 16/11 a 22/11 • Reta Final - Questões & Leis Secas</option>
-          <option value="9">Semana 9: 23/11 a 30/11 • Revisão Geral de Véspera & Fixação</option>
+          <option value="all">Todas as Etapas (1 a 9)</option>
+          <option value="1">Etapa 1: Fundamentos de Alto Peso</option>
+          <option value="2">Etapa 2: Provas, Sintaxe e Crimes</option>
+          <option value="3">Etapa 3: Licitações, Prisões e Informática</option>
+          <option value="4">Etapa 4: Contabilidade 1, Drogas e Ação Penal</option>
+          <option value="5">Etapa 5: Medicina Legal 1 e Contabilidade 2</option>
+          <option value="6">Etapa 6: Igualdade Racial, Medicina 2 e RLM</option>
+          <option value="7">Etapa 7: Aprofundamento dos Tópicos +40%</option>
+          <option value="8">Etapa 8: Reta Final - Questões & Leis Secas</option>
+          <option value="9">Etapa 9: Revisão Geral de Véspera & Fixação</option>
         </select>
       </div>
     </div>
