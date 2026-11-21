@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado 01 — Investigador PC-BA | Ambiente de Prova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="simulado.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="exam-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="badge-shield" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <h1>PC-BA <span>Simulado 01</span></h1>
+          <p class="brand-sub">Investigador de Polícia Civil • SAEB nº 02/2026 • Instituto AOCP • 100 Questões</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Cronômetro 4h -->
+        <div class="timer-widget" id="timerWidget" title="Tempo oficial da prova: 04h00min">
+          <span>⏱️</span>
+          <span class="timer-readout" id="timerDisplay">04:00:00</span>
+          <button class="timer-btn" id="toggleTimerBtn" title="Iniciar / Pausar cronômetro">▶</button>
+          <button class="timer-btn" id="resetTimerBtn" title="Reiniciar cronômetro">↺</button>
+        </div>
+
+        <button class="btn btn-secondary" id="studyModeBtn" title="No Modo Estudo, você pode conferir o gabarito comentado de cada questão logo após responder">
+          🎯 Modo Prova
+        </button>
+
+        <button class="btn btn-secondary" id="openSheetBtn" title="Ver Folha de Respostas completa">
+          📋 Folha de Respostas
+        </button>
+
+        <button class="btn btn-gold" id="openGabaritoBtn" title="Corrigir o simulado com o Gabarito Oficial Comentado">
+          ✅ Finalizar &amp; Corrigir
+        </button>
+
+        <button class="btn btn-secondary" id="themeToggleBtn" title="Alternar entre Modo Escuro e Modo Papel Claro">
+          ☀️ Modo Claro
+        </button>
+
+        <a class="btn btn-ghost" href="../index.html" title="Voltar ao Cronograma PC-BA">
+          ← Cronograma
+        </a>
+      </div>
+    </div>
+    <div class="top-progress-track">
+      <div class="top-progress-fill" id="topProgressBar"></div>
+    </div>
+  </header>
+
+  <!-- Área Principal -->
+  <main class="exam-layout">
+    <!-- Banner de Resultado (aparece após correção com gabarito) -->
+    <section class="graded-banner hidden" id="gradedBanner">
+      <div class="graded-stats" id="gradedBannerStats"></div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <button class="btn btn-success" id="openReportBtn">📊 Ver Relatório por Disciplina</button>
+        <button class="btn btn-secondary" id="filterErrorsQuickBtn">🎯 Revisar Erros</button>
+        <button class="btn btn-danger" id="clearGradeBtn">Desfazer Correção</button>
+      </div>
+    </section>
+
+    <!-- Coluna Esquerda: Texto de Apoio + Questão Atual -->
+    <section class="question-stage">
+      <!-- Texto de Apoio (Língua Portuguesa: Q1–Q10) -->
+      <article class="support-text-card hidden" id="supportTextCard">
+        <div class="support-text-header" id="supportTextToggle">
+          <div class="support-text-title">
+            <span>📖</span>
+            <span id="supportTextTitle">Texto de Apoio — A arte de esquecer</span>
+            <span style="font-size:0.76rem; color:var(--text-muted); font-weight:500;">(Questões 1 a 10)</span>
+          </div>
+          <span id="supportTextArrow" style="font-size:0.82rem; color:var(--text-muted);">Ocultar ▲</span>
+        </div>
+        <div class="support-text-body" id="supportTextBody"></div>
+      </article>
+
+      <!-- Cartão da Questão -->
+      <article class="question-card" id="questionCard">
+        <div class="q-meta-bar">
+          <div class="q-meta-left">
+            <span class="q-number-badge" id="qNumberBadge">Questão 01 / 100</span>
+            <span class="discipline-badge" id="qDisciplineBadge">Língua Portuguesa</span>
+            <span class="q-status-pill" id="qGradedStatus" style="display:none;"></span>
+          </div>
+
+          <div class="q-meta-actions">
+            <button class="btn btn-secondary flag-btn" id="flagBtn" title="Marcar questão para revisão posterior (Tecla M)">
+              🚩 Revisar depois
+            </button>
+            <button class="btn btn-ghost" id="clearAnswerBtn" title="Limpar alternativa marcada">
+              Limpar
+            </button>
+          </div>
+        </div>
+
+        <div class="q-stem" id="qStem"></div>
+
+        <div class="options-list" id="optionsList" role="radiogroup" aria-label="Alternativas da questão"></div>
+
+        <!-- Gabarito Comentado (exibido após correção ou no Modo Estudo) -->
+        <div class="explanation-card hidden" id="explanationCard">
+          <div class="explanation-header">
+            <span class="explanation-badge" id="explanationBadge">Gabarito: A</span>
+            <span class="explanation-topic" id="explanationTopic"></span>
+          </div>
+          <p class="explanation-text" id="explanationText"></p>
+        </div>
+
+        <!-- Rascunho / Anotações -->
+        <div class="notes-section">
+          <button class="notes-toggle" id="notesToggleBtn">
+            ✏️ <span id="notesToggleLabel">Abrir rascunho / anotação desta questão</span>
+          </button>
+          <textarea
+            class="notes-area hidden"
+            id="notesTextarea"
+            placeholder="Use este espaço para cálculos, justificativas ou dúvidas sobre esta questão..."
+          ></textarea>
+        </div>
+
+        <!-- Navegação Anterior / Próxima -->
+        <div class="q-nav-bar">
+          <button class="btn btn-secondary" id="prevBtn">← Anterior</button>
+
+          <div class="q-nav-center">
+            <button class="btn btn-ghost" id="nextUnansweredBtn" title="Ir para a próxima questão em branco">
+              Próxima em branco ⏭
+            </button>
+          </div>
+
+          <button class="btn btn-primary" id="nextBtn">Próxima →</button>
+        </div>
+      </article>
+
+      <!-- Dica de Atalhos -->
+      <div class="shortcuts-hint">
+        <span>Atalhos: <kbd>A</kbd>–<kbd>E</kbd> marcar alternativa</span>
+        <span><kbd>←</kbd> <kbd>→</kbd> navegar questões</span>
+        <span><kbd>M</kbd> marcar para revisão</span>
+        <span>✂️ ou clique direito para riscar alternativa</span>
+      </div>
+    </section>
+
+    <!-- Coluna Direita: Mapa de Questões -->
+    <aside class="exam-sidebar">
+      <div class="sidebar-stats">
+        <div class="stat-mini">
+          <strong id="statAnswered">0</strong>
+          <span>Respondidas</span>
+        </div>
+        <div class="stat-mini">
+          <strong id="statBlank">100</strong>
+          <span>Em branco</span>
+        </div>
+        <div class="stat-mini">
+          <strong id="statFlagged" style="color:var(--accent-gold);">0</strong>
+          <span>Revisão</span>
+        </div>
+      </div>
+
+      <div class="sidebar-filters">
+        <select class="discipline-select" id="disciplineFilter" aria-label="Filtrar por disciplina">
+          <option value="all">Todas as Disciplinas (1–100)</option>
+        </select>
+
+        <div class="filter-pills" id="statusFilterPills">
+          <button class="filter-pill active" data-filter="all">Todas</button>
+          <button class="filter-pill" data-filter="unanswered">Em branco</button>
+          <button class="filter-pill" data-filter="answered">Respondidas</button>
+          <button class="filter-pill" data-filter="flagged">🚩 Revisão</button>
+          <button class="filter-pill hidden" data-filter="wrong" id="pillWrong">❌ Erros</button>
+          <button class="filter-pill hidden" data-filter="correct" id="pillCorrect">✅ Acertos</button>
+        </div>
+      </div>
+
+      <div class="q-grid-wrap">
+        <div class="q-grid" id="questionGrid"></div>
+      </div>
+
+      <div class="sidebar-legend">
+        <span class="legend-item"><i class="dot dot-answered"></i> Respondida</span>
+        <span class="legend-item"><i class="dot dot-flagged"></i> Revisão</span>
+        <span class="legend-item"><i class="dot dot-correct"></i> Acerto</span>
+        <span class="legend-item"><i class="dot dot-wrong"></i> Erro</span>
+      </div>
+
+      <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+        <button class="btn btn-secondary" style="flex:1; font-size:0.78rem;" id="exportBackupBtn">💾 Backup</button>
+        <label class="btn btn-secondary" style="flex:1; font-size:0.78rem; cursor:pointer;">
+          📥 Restaurar
+          <input type="file" id="importBackupInput" accept=".json" style="display:none;">
+        </label>
+        <button class="btn btn-danger" style="font-size:0.78rem;" id="resetAllBtn" title="Apagar todas as respostas e reiniciar o simulado">
+          ↺ Zerar
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal: Folha de Respostas -->
+  <div class="modal-overlay hidden" id="sheetModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h2>📋 Folha de Respostas — Simulado 01 (1 a 100)</h2>
+        <button class="modal-close" data-close="sheetModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.86rem; color:var(--text-muted);">
+          Clique em qualquer linha para ir diretamente à questão correspondente.
+        </p>
+        <div class="bubble-sheet" id="bubbleSheetContainer"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="copyAnswersBtn">📄 Copiar Minhas Respostas</button>
+        <button class="btn btn-primary" data-close="sheetModal">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Confirmar Correção / Gabarito Oficial -->
+  <div class="modal-overlay hidden" id="gabaritoModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>✅ Corrigir Simulado — Gabarito Oficial Comentado</h2>
+        <button class="modal-close" data-close="gabaritoModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-callout" id="gabaritoSummaryInfo">
+          <strong>Gabarito Oficial Comentado (100 questões) já carregado!</strong><br>
+          Clique em <em>Corrigir Simulado Agora</em> para ver sua nota geral, aproveitamento por disciplina e o comentário oficial de todas as questões.
+        </div>
+
+        <details class="advanced-gabarito">
+          <summary>Editar ou colar outro gabarito manualmente (opcional)</summary>
+          <textarea
+            class="gabarito-textarea"
+            id="gabaritoInput"
+            style="margin-top:0.65rem;"
+            placeholder="Ex.: 1-A, 2-C, 3-E, 4-B, 5-D..."
+          ></textarea>
+          <div id="gabaritoParseStatus" style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem;"></div>
+        </details>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-close="gabaritoModal">Voltar à Prova</button>
+        <button class="btn btn-success" id="applyGabaritoBtn">✅ Corrigir Simulado Agora</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Relatório de Desempenho -->
+  <div class="modal-overlay hidden" id="reportModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h2>📊 Relatório de Desempenho — Simulado 01 PC-BA</h2>
+        <button class="modal-close" data-close="reportModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="report-summary-grid" id="reportSummaryGrid"></div>
+        <h3 style="font-size:0.96rem; margin-top:0.4rem;">Aproveitamento por Disciplina</h3>
+        <div class="discipline-report-list" id="disciplineReportList"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="copyReportBtn">📋 Copiar Resumo</button>
+        <button class="btn btn-primary" data-close="reportModal">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="questions.js"></script>
+  <script src="gabarito.js"></script>
+  <script src="simulado.js"></script>
+</body>
+</html>
