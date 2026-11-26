@@ -13,6 +13,7 @@
     flagged: {},        // { "1": true, ... }
     eliminated: {},     // { "1": ["B", "D"], ... }
     notes: {},          // { "1": "texto...", ... }
+    revealedQuestions: {}, // { "1": true, ... }
     answerKey: Object.keys(OFFICIAL_ANSWER_KEY || {}).length ? { ...OFFICIAL_ANSWER_KEY } : {},
     graded: false,
     studyMode: false,
@@ -57,7 +58,11 @@
     clearAnswerBtn: document.getElementById("clearAnswerBtn"),
     qStem: document.getElementById("qStem"),
     optionsList: document.getElementById("optionsList"),
+    qAnswerBar: document.getElementById("qAnswerBar"),
+    revealAnswerBtn: document.getElementById("revealAnswerBtn"),
+    qAnswerHint: document.getElementById("qAnswerHint"),
     explanationCard: document.getElementById("explanationCard"),
+    explanationVerdict: document.getElementById("explanationVerdict"),
     explanationBadge: document.getElementById("explanationBadge"),
     explanationTopic: document.getElementById("explanationTopic"),
     explanationText: document.getElementById("explanationText"),
@@ -115,6 +120,9 @@
       if (Object.keys(OFFICIAL_ANSWER_KEY || {}).length === 100 && Object.keys(merged.answerKey || {}).length === 0) {
         merged.answerKey = { ...OFFICIAL_ANSWER_KEY };
       }
+      if (!merged.revealedQuestions || typeof merged.revealedQuestions !== "object") {
+        merged.revealedQuestions = {};
+      }
       merged.timerRunning = false;
       return merged;
     } catch {
@@ -162,7 +170,14 @@
 
   function shouldRevealQuestion(num) {
     if (state.graded) return true;
+    if (state.revealedQuestions && state.revealedQuestions[num]) return true;
     return !!(state.studyMode && state.answers[num]);
+  }
+
+  function hasAnyRevealed() {
+    if (state.graded) return true;
+    if (state.revealedQuestions && Object.keys(state.revealedQuestions).length > 0) return true;
+    return !!(state.studyMode && Object.keys(state.answers).length > 0);
   }
 
   function isQuestionCorrect(num) {
@@ -320,11 +335,16 @@
       if (selected === letter) row.classList.add("selected");
       if (eliminatedList.includes(letter)) row.classList.add("eliminated");
 
+      let resultTagHtml = "";
       if (revealed && correctKey) {
         if (letter === correctKey) {
           row.classList.add("graded-correct");
+          resultTagHtml = selected === letter
+            ? `<span class="option-tag correct-tag">✓ Você acertou</span>`
+            : `<span class="option-tag correct-tag">✓ Correta</span>`;
         } else if (selected === letter && selected !== correctKey) {
           row.classList.add("graded-wrong");
+          resultTagHtml = `<span class="option-tag wrong-tag">✗ Sua resposta</span>`;
         }
       }
 
@@ -336,6 +356,7 @@
       btn.innerHTML = `
         <span class="option-letter">${letter}</span>
         <span class="option-text">${q.options[letter]}</span>
+        ${resultTagHtml}
       `;
       btn.addEventListener("click", () => selectOption(num, letter));
       btn.addEventListener("contextmenu", e => {
@@ -355,14 +376,55 @@
       els.optionsList.appendChild(row);
     });
 
-    // Gabarito Comentado (exibido após correção ou no Modo Estudo ao responder)
+    // Barra "Ver Resposta" da questão
+    const hasKeyForQ = !!state.answerKey[num];
+    if (state.graded || !hasKeyForQ) {
+      els.qAnswerBar.classList.add("hidden");
+    } else {
+      els.qAnswerBar.classList.remove("hidden");
+      const autoRevealedByStudy = !!(state.studyMode && selected && !state.revealedQuestions[num]);
+      els.revealAnswerBtn.classList.toggle("revealed", revealed);
+      els.revealAnswerBtn.disabled = autoRevealedByStudy;
+
+      if (autoRevealedByStudy) {
+        els.revealAnswerBtn.textContent = "📚 Resposta exibida";
+        els.qAnswerHint.textContent = "Modo Estudo ativo: o gabarito aparece automaticamente ao marcar uma alternativa.";
+      } else if (revealed) {
+        els.revealAnswerBtn.textContent = "🙈 Ocultar Resposta";
+        els.qAnswerHint.textContent = "Gabarito revelado para esta questão. Clique para ocultar novamente.";
+      } else if (selected) {
+        els.revealAnswerBtn.textContent = "✅ Ver Resposta";
+        els.qAnswerHint.innerHTML = `Você marcou a alternativa <strong>${selected}</strong>. Clique em <strong>Ver Resposta</strong> para conferir se acertou ou errou.`;
+      } else {
+        els.revealAnswerBtn.textContent = "👁️ Ver Resposta";
+        els.qAnswerHint.innerHTML = "Marque uma alternativa e clique em <strong>Ver Resposta</strong> (ou clique direto para ver a alternativa correta).";
+      }
+    }
+
+    // Feedback de Correção + Gabarito Comentado
     const exp = typeof OFFICIAL_EXPLANATIONS !== "undefined" ? OFFICIAL_EXPLANATIONS[num] : null;
-    if (revealed && correctKey && exp) {
+    if (revealed && correctKey) {
       els.explanationCard.classList.remove("hidden");
-      els.explanationCard.classList.toggle("wrong-context", !!(selected && selected !== correctKey));
-      els.explanationBadge.textContent = `Gabarito: ${correctKey}`;
-      els.explanationTopic.textContent = exp.topic || "Comentário Oficial";
-      els.explanationText.textContent = exp.text || "";
+      const isWrong = !!(selected && selected !== correctKey);
+      const isBlank = !selected;
+      els.explanationCard.classList.toggle("wrong-context", isWrong);
+      els.explanationCard.classList.toggle("blank-context", isBlank);
+
+      els.explanationVerdict.className = "explanation-verdict";
+      if (isBlank) {
+        els.explanationVerdict.classList.add("is-blank");
+        els.explanationVerdict.textContent = `💡 Você não marcou nenhuma alternativa. A alternativa correta é a letra ${correctKey}.`;
+      } else if (isWrong) {
+        els.explanationVerdict.classList.add("is-wrong");
+        els.explanationVerdict.textContent = `✗ Você errou! Você marcou a letra ${selected}, mas a alternativa correta é a letra ${correctKey}.`;
+      } else {
+        els.explanationVerdict.classList.add("is-correct");
+        els.explanationVerdict.textContent = `✓ Você acertou! A alternativa correta é a letra ${correctKey}.`;
+      }
+
+      els.explanationBadge.textContent = `Alternativa correta: ${correctKey}`;
+      els.explanationTopic.textContent = exp && exp.topic ? exp.topic : "Gabarito Oficial";
+      els.explanationText.textContent = exp && exp.text ? exp.text : "";
     } else {
       els.explanationCard.classList.add("hidden");
     }
@@ -392,8 +454,9 @@
     els.topProgressBar.style.width = `${(answeredCount / EXAM_META.totalQuestions) * 100}%`;
 
     // Mostrar/ocultar filtros de correção
-    els.pillWrong.classList.toggle("hidden", !state.graded);
-    els.pillCorrect.classList.toggle("hidden", !state.graded);
+    const showGradeFilters = hasAnyRevealed();
+    els.pillWrong.classList.toggle("hidden", !showGradeFilters);
+    els.pillCorrect.classList.toggle("hidden", !showGradeFilters);
 
     // Banner de resultado
     if (state.graded) {
@@ -495,9 +558,48 @@
   function clearCurrentAnswer() {
     if (state.graded) return;
     delete state.answers[state.currentQuestion];
+    if (state.revealedQuestions) delete state.revealedQuestions[state.currentQuestion];
     saveState();
     renderQuestion();
     renderSidebarAndProgress();
+  }
+
+  function toggleRevealAnswer(num) {
+    if (state.graded) return;
+    const key = state.answerKey[num];
+    if (!key) {
+      showToast("Gabarito ainda não disponível para esta questão.");
+      return;
+    }
+    if (!state.revealedQuestions) state.revealedQuestions = {};
+    const selected = state.answers[num] || null;
+    if (state.studyMode && selected && !state.revealedQuestions[num]) {
+      return;
+    }
+    if (state.revealedQuestions[num]) {
+      delete state.revealedQuestions[num];
+      if (!hasAnyRevealed() && (filterStatus === "wrong" || filterStatus === "correct")) {
+        filterStatus = "all";
+        els.statusFilterPills.querySelectorAll(".filter-pill").forEach(p => {
+          p.classList.toggle("active", p.dataset.filter === "all");
+        });
+      }
+      saveState();
+      renderQuestion();
+      renderSidebarAndProgress();
+      return;
+    }
+    state.revealedQuestions[num] = true;
+    saveState();
+    renderQuestion();
+    renderSidebarAndProgress();
+    if (!selected) {
+      showToast(`💡 Alternativa correta: ${key}`);
+    } else if (selected === key) {
+      showToast(`✓ Você acertou! Alternativa correta: ${key}`);
+    } else {
+      showToast(`✗ Você errou! Marcada: ${selected} | Correta: ${key}`);
+    }
   }
 
   function toggleFlag(num) {
@@ -548,13 +650,13 @@
       for (let row = 1; row <= 20; row++) {
         const qNum = col * 20 + row;
         const userAns = state.answers[qNum];
-        const keyAns = state.graded ? state.answerKey[qNum] : null;
+        const keyAns = shouldRevealQuestion(qNum) ? state.answerKey[qNum] : null;
 
         const rowDiv = document.createElement("div");
         rowDiv.className = "bubble-row";
         rowDiv.innerHTML = `<span class="bubble-num">${qNum}.</span>` + LETTERS.map(l => {
           let cls = "bubble-dot";
-          if (state.graded && keyAns) {
+          if (keyAns) {
             if (userAns === l && userAns === keyAns) cls += " correct";
             else if (userAns === l && userAns !== keyAns) cls += " wrong";
             else if (l === keyAns) cls += " expected";
@@ -765,6 +867,7 @@
     // Ações da questão
     els.flagBtn.addEventListener("click", () => toggleFlag(state.currentQuestion));
     els.clearAnswerBtn.addEventListener("click", clearCurrentAnswer);
+    els.revealAnswerBtn.addEventListener("click", () => toggleRevealAnswer(state.currentQuestion));
 
     els.notesToggleBtn.addEventListener("click", () => {
       const hidden = els.notesTextarea.classList.toggle("hidden");
@@ -1000,6 +1103,8 @@
         if (state.currentQuestion > 1) goToQuestion(state.currentQuestion - 1);
       } else if (key === "M") {
         toggleFlag(state.currentQuestion);
+      } else if (key === "R") {
+        toggleRevealAnswer(state.currentQuestion);
       }
     });
   }

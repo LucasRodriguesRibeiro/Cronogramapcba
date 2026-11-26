@@ -111,10 +111,21 @@
 
         <div class="options-list" id="optionsList" role="radiogroup" aria-label="Alternativas da questão"></div>
 
-        <!-- Gabarito Comentado (exibido após correção ou no Modo Estudo) -->
+        <!-- Botão Ver Resposta da Questão -->
+        <div class="q-answer-bar" id="qAnswerBar">
+          <button type="button" class="btn btn-reveal" id="revealAnswerBtn" title="Conferir se você acertou ou errou e ver a alternativa correta (Tecla R)">
+            👁️ Ver Resposta
+          </button>
+          <span class="q-answer-hint" id="qAnswerHint">
+            Marque uma alternativa e clique em <strong>Ver Resposta</strong> para conferir o gabarito.
+          </span>
+        </div>
+
+        <!-- Gabarito Comentado (exibido ao clicar em Ver Resposta, no Modo Estudo ou após correção) -->
         <div class="explanation-card hidden" id="explanationCard">
+          <div class="explanation-verdict" id="explanationVerdict"></div>
           <div class="explanation-header">
-            <span class="explanation-badge" id="explanationBadge">Gabarito: A</span>
+            <span class="explanation-badge" id="explanationBadge">Alternativa correta: A</span>
             <span class="explanation-topic" id="explanationTopic"></span>
           </div>
           <p class="explanation-text" id="explanationText"></p>
@@ -149,6 +160,7 @@
       <!-- Dica de Atalhos -->
       <div class="shortcuts-hint">
         <span>Atalhos: <kbd>A</kbd>–<kbd>E</kbd> marcar alternativa</span>
+        <span><kbd>R</kbd> ver resposta</span>
         <span><kbd>←</kbd> <kbd>→</kbd> navegar questões</span>
         <span><kbd>M</kbd> marcar para revisão</span>
         <span>✂️ ou clique direito para riscar alternativa</span>
